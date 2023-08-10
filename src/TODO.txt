@@ -1,0 +1,14 @@
+TODO
+    import three.js
+    import rain code
+    make scroll
+    make collapsible header
+    make nice settings pane
+
+BUGS
+    
+
+
+animate sliders (time.... think of changing weather!!)
+formate date and time
+format percentages
