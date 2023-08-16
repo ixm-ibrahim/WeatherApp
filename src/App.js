@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { ControlsComponent } from './ControlsComponent';
+import { ControlsComponent } from './components/ControlsComponent.jsx';
 
 function App() {
   
