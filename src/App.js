@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import { ControlsComponent } from './ControlsComponent';
+import { WeatherGraphcis } from './WeatherGraphics';
+import { Canvas, useFrame } from '@react-three/fiber'
 
 function App() {
   
@@ -23,6 +25,12 @@ function App() {
       <div>
         <ControlsComponent />
       </div>
+    <Canvas>
+      <ambientLight />
+      <pointLight position={[10, 10, 10]} />
+      <WeatherGraphcis position={[-1.2, 0, 0]} />
+      <WeatherGraphcis position={[1.2, 0, 0]} />
+    </Canvas>,
     </div>
   );
 }
