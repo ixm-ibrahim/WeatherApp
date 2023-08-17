@@ -1,7 +1,10 @@
-import { useRef, useState } from "react"
+import { useRef, useState, useMemo, useEffect } from "react"
 import { Canvas, useFrame } from '@react-three/fiber'
 
-export const WeatherGraphcis = (props) => {
+import vertexShader from './Shaders/vert';
+import fragmentShader from './Shaders/frag';
+
+export const BoxGraphic = (props) => {
     // This reference gives us direct access to the THREE.Mesh object
     const ref = useRef();
     // Hold state for hovered and clicked events
@@ -15,7 +18,7 @@ export const WeatherGraphcis = (props) => {
         <mesh
             {...props}
             ref={ref}
-            scale={clicked ? 1.5 : 1}
+            scale={clicked ? 5 : 1}
             onClick={(event) => click(!clicked)}
             onPointerOver={(event) => hover(true)}
             onPointerOut={(event) => hover(false)}>
@@ -24,3 +27,37 @@ export const WeatherGraphcis = (props) => {
         </mesh>
     );
 }
+
+export const ShadersGraphic = ({ canvasRef}) => {
+    // This reference will give us direct access to the mesh
+    const mesh = useRef();
+    
+    const uniforms = useMemo(
+        () => ({
+            iTime: {
+                value: 0.0,
+            },
+            u_aspectRatio: {
+                value: 1.0,
+            },
+        }), []
+    );
+
+    useFrame((state) => {
+        const { clock } = state;
+        mesh.current.material.uniforms.iTime.value = clock.getElapsedTime();
+        mesh.current.material.uniforms.u_aspectRatio.value = canvasRef.current.clientHeight / canvasRef.current.clientWidth;
+    });
+    
+    return (
+      <mesh ref={mesh} position={[0, 0, 0]} scale={1.0}>
+        {/*PlaneBufferGeometry?*/}
+        <planeGeometry args={[2, 2, 1, 1]} />
+        <shaderMaterial
+          fragmentShader={fragmentShader}
+          vertexShader={vertexShader}
+          uniforms={uniforms}
+        />
+      </mesh>
+    );
+  };
