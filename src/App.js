@@ -1,8 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 import { ControlsComponent } from './components/ControlsComponent.jsx';
+import { useRef } from "react";
+import { BoxGraphic, ShadersGraphic } from './WeatherGraphics';
+import { Canvas, useFrame } from '@react-three/fiber'
 
 function App() {
+  const canvasRef = useRef(null);
+  //const canvasRef = React.createRef();
   
   return (
     <div className="App">
@@ -22,6 +27,17 @@ function App() {
       </header>
       <div>
         <ControlsComponent />
+      </div>
+      <Canvas>
+        <ambientLight />
+        <pointLight position={[10, 10, 10]} />
+        <BoxGraphic position={[-1.2, 0, 0]} />
+        <BoxGraphic position={[1.2, 0, 0]} />
+      </Canvas>
+      <div ref={canvasRef}>
+        <Canvas camera={{ position: [0.0, 0.0, 1.0] }}>
+          <ShadersGraphic canvasRef={canvasRef}/>
+        </Canvas>
       </div>
     </div>
   );
