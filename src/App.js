@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { ControlsComponent } from './components/ControlsComponent.jsx';
 import { useRef } from "react";
-import { BoxGraphic, ShadersGraphic } from './WeatherGraphics';
+import { BoxGraphic, ShadersGraphic } from './components/WeatherGraphics';
 import { Canvas, useFrame } from '@react-three/fiber'
 
 function App() {
