@@ -1,4 +1,4 @@
-import { FormItem, DefaultWeatherState, DefaultWeatherControls, formReducer } from "./Controls.js"
+import { FormItem, DefaultWeatherState, DefaultWeatherControls, formReducer } from "./Controls"
 import { useState, useEffect, useReducer } from "react";
 
 function sleep(milliseconds) {

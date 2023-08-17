@@ -2,8 +2,8 @@ import { useRef, useState, useMemo, useEffect } from "react";
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Vec2 } from "three";
 
-import vertexShader from './Shaders/vert';
-import fragmentShader from './Shaders/frag';
+import vertexShader from '../Shaders/vert';
+import fragmentShader from '../Shaders/frag';
 
 export const BoxGraphic = (props) => {
     // This reference gives us direct access to the THREE.Mesh object
