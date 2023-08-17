@@ -73,6 +73,7 @@ void main() {
 const fragmentShader = `
 uniform float iTime;
 uniform float u_aspectRatio;
+uniform vec2 iMouse;
 
 varying vec2 varyingUV;
 
@@ -89,6 +90,7 @@ varying vec2 varyingUV;
 #define ITERATIONS_NORMAL 40 // waves iterations when calculating normals
 
 //#define NormalizedMouse (iMouse.xy / iResolution.xy) // normalize mouse coords
+#define NormalizedMouse iMouse.xy // normalize mouse coords
 
 // Calculates wave value and its derivative, 
 // for the wave direction, position in space, wave frequency and time
@@ -177,20 +179,18 @@ mat3 createRotationMatrixAxisAngle(vec3 axis, float angle) {
 }
 
 // Helper function that generates camera ray based on UV and mouse
+//vec3 getRay(vec2 fragCoord) {
 vec3 getRay() {
   //vec2 uv = ((fragCoord.xy / iResolution.xy) * 2.0 - 1.0) * vec2(iResolution.x / iResolution.y, 1.0);
-  vec2 uv = (-1.0 + 2.0 *varyingUV) / vec2(u_aspectRatio, 1.);
+  vec2 uv = (-1.0 + 2.0 *varyingUV) * vec2(1., u_aspectRatio);
   // for fisheye, uncomment following line and comment the next one
   //vec3 proj = normalize(vec3(uv.x, uv.y, 1.0) + vec3(uv.x, uv.y, -1.0) * pow(length(uv), 2.0) * 0.05);  
   vec3 proj = normalize(vec3(uv.x, uv.y, 1.5));
   /*if(iResolution.x < 600.0) {
     return proj;
-  }
+  }*/
   return createRotationMatrixAxisAngle(vec3(0.0, -1.0, 0.0), 3.0 * ((NormalizedMouse.x + 0.5) * 2.0 - 1.0)) 
     * createRotationMatrixAxisAngle(vec3(1.0, 0.0, 0.0), 0.5 + 1.5 * ((NormalizedMouse.y * 1.5) * 2.0 - 1.0))
-    * proj;*/
-  return createRotationMatrixAxisAngle(vec3(0.0, -1.0, 0.0), 3.0 * ((0.0 + 0.5) * 2.0 - 1.0)) 
-    * createRotationMatrixAxisAngle(vec3(1.0, 0.0, 0.0), 0.5 + 1.5 * ((0.2 * 1.5) * 2.0 - 1.0))
     * proj;
 }
 
@@ -268,7 +268,6 @@ void main() {
 
   // define ray origin, moving around
   vec3 origin = vec3(iTime, CAMERA_HEIGHT, iTime);
-  origin = vec3(0,0.3,0);
 
   // calculate intersections and reconstruct positions
   float highPlaneHit = intersectPlane(origin, ray, waterPlaneHigh, vec3(0.0, 1.0, 0.0));
