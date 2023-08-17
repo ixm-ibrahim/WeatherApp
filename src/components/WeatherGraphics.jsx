@@ -1,5 +1,6 @@
-import { useRef, useState, useMemo, useEffect } from "react"
-import { Canvas, useFrame } from '@react-three/fiber'
+import { useRef, useState, useMemo, useEffect } from "react";
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Vec2 } from "three";
 
 import vertexShader from '../Shaders/vert';
 import fragmentShader from '../Shaders/frag';
@@ -29,6 +30,8 @@ export const BoxGraphic = (props) => {
 }
 
 export const ShadersGraphic = ({ canvasRef}) => {
+    const { mouse } = useThree()
+
     // This reference will give us direct access to the mesh
     const mesh = useRef();
     
@@ -39,6 +42,9 @@ export const ShadersGraphic = ({ canvasRef}) => {
             },
             u_aspectRatio: {
                 value: 1.0,
+            },
+            iMouse: {
+                value: mouse,
             },
         }), []
     );
