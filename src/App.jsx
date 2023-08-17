@@ -1,5 +1,5 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from './assets/images/logo.svg';
+import './assets/css/App.css';
 import { ControlsComponent } from './components/ControlsComponent.jsx';
 import { useRef } from "react";
 import { BoxGraphic, ShadersGraphic } from './components/WeatherGraphics';
