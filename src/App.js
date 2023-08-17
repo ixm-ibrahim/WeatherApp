@@ -34,7 +34,7 @@ function App() {
         <BoxGraphic position={[-1.2, 0, 0]} />
         <BoxGraphic position={[1.2, 0, 0]} />
       </Canvas>
-      <div ref={canvasRef}>
+      <div className="App-canvas" ref={canvasRef}>
         <Canvas camera={{ position: [0.0, 0.0, 1.0] }}>
           <ShadersGraphic canvasRef={canvasRef}/>
         </Canvas>

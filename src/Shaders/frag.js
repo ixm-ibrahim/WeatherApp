@@ -4,7 +4,7 @@
 2. Replace "gl_FragCoord.xy / iResolution.xy" with "varyingUV" or "iResolution.xy,uv=(fragCoord-0.5*R)/R.x" with "-1.0 + 2.0 *varyingUV" (make sure to multiply/divide by aspect ratio)
 3. Replace any iChannels with textures?
 4. Make the function main() and returns "gl_FragColor" (make sure w is set to 1 if there is no transparency)
-
+5. Note that iMouse is now normalized, not in screen space like in Shadertoy
 */
 
 
