@@ -4,7 +4,7 @@ import '../assets/css/App.css';
 import { ControlsComponent } from '../components/ControlsComponent.jsx';
 import { useRef } from "react";
 import { BoxGraphic, ShadersGraphic } from '../components/WeatherGraphics';
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber';
 
 const HomePage = () => {
     const canvasRef = useRef(null);
